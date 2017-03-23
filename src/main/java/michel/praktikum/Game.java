@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Random;
 
 public class Game extends JFrame {
 	private JLayeredPane mainPane = new JLayeredPane();
@@ -131,11 +132,13 @@ public class Game extends JFrame {
 	public static void main(String[] args) throws Exception {
 		final Game game = new Game();
 		final Enemy enemy = game.createEnemy();
+		enemy.setPosition(0, 300);
 
 		while (game.isRunning()) {
-			if (game.mouseClicked()) {
-				System.out.println("boom");
-			}
+			final int x = Math.abs(new Random(System.currentTimeMillis()).nextInt() % 10);
+			final int y = new Random(System.currentTimeMillis()).nextInt() % 10;
+
+			enemy.setPosition(enemy.getX() + x, enemy.getY() + y);
 			Thread.sleep(100);
 		}
 	}
