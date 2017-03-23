@@ -7,6 +7,8 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
@@ -17,6 +19,7 @@ public class Game extends JFrame {
 	private JLayeredPane mainPane = new JLayeredPane();
 	private boolean running = true;
 	private boolean mouseDown = false;
+	private int pressedKey;
 
 	public Game() throws Exception {
 		super("Gravity Simulator");
@@ -66,6 +69,23 @@ public class Game extends JFrame {
 
 			@Override
 			public void windowDeactivated(WindowEvent e) {
+
+			}
+		});
+
+		addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				pressedKey = e.getExtendedKeyCode();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
 
 			}
 		});
@@ -127,6 +147,10 @@ public class Game extends JFrame {
 
 	public boolean mouseClicked() {
 		return mouseDown;
+	}
+
+	public int getPressedKey() {
+		return pressedKey;
 	}
 
 	public static void main(String[] args) throws Exception {
